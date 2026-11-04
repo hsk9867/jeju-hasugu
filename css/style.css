@@ -126,7 +126,7 @@ button{background:none;border:0;cursor:pointer}
 .board__cs h2{font-size:34px;font-weight:700;color:var(--ink);letter-spacing:-1px;line-height:1.25}
 .board__area{margin-top:6px;font-size:22px;font-weight:400;color:var(--ink);letter-spacing:1px}
 .board__pill{display:inline-block;align-self:center;margin-top:16px;padding:9px 26px;border-radius:999px;background:var(--blue);color:#fff;font-size:17px;font-weight:700;letter-spacing:-.3px}
-.board__list{margin-top:14px;font-size:17px;color:var(--ink-2);letter-spacing:-.3px}
+.board__list{margin-top:16px;font-size:17px;color:var(--ink-2);letter-spacing:-.3px}
 .board__call{background:var(--blue);color:#fff;text-align:center;padding:30px 20px 28px;display:flex;flex-direction:column;justify-content:center;transition:background .3s}
 .board__call:hover{background:var(--blue-d)}
 .board__t1{font-size:36px;font-weight:700;letter-spacing:-1px;line-height:1.2}
