@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Do+Hyeon&display=swap">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/effects.css">
 </head>
 <body>
 
@@ -56,9 +57,9 @@
 <section class="hero">
   <figure class="hero__visual"><img src="img/hero.jpg" alt="제주 현장에서 맨홀 배관을 고압세척하는 싹뚜러 작업 차량과 기사" fetchpriority="high"></figure>
   <div class="wrap hero__copy">
-    <p class="hero__kicker">제주 전 지역 · 24시간 365일 출동</p>
-    <h1 class="hero__title">제주 하수구막힘,<br><em>싹! 뚫어</em>드립니다</h1>
-    <p class="hero__lede">하수구·변기·싱크대 막힘부터 배관 관리, 고압세척, 해빙 작업까지. 제주 전 지역 365일 24시간 연중무휴로 고객님의 불편을 빠르고 확실하게 해결해드립니다.</p>
+    <p class="hero__kicker"><span class="live-dot" aria-hidden="true"></span>제주 전 지역 · <b class="num">24</b>시간 <b class="num">365</b>일 출동</p>
+    <h1 class="hero__title"><span class="t-outline">제주 하수구막힘,</span><br><span class="t-pop">싹!</span> <em class="t-marker">뚫어</em>드립니다</h1>
+    <p class="hero__lede">하수구·변기·싱크대 막힘부터 배관 관리, 고압세척, 해빙 작업까지.<br class="pc-only"> 제주 전 지역 <mark class="hl">365일 24시간 연중무휴</mark>로 고객님의 불편을 <mark class="hl">빠르고 확실하게</mark> 해결해드립니다.</p>
     <ul class="chiprow" aria-label="주요 서비스">
       <li><svg class="ic"><use href="#i-check"/></svg>하수구 고압세척</li>
       <li><svg class="ic"><use href="#i-check"/></svg>배관 내시경 촬영</li>
@@ -76,10 +77,10 @@
 <!-- 핵심 숫자 -->
 <section class="facts" aria-label="핵심 조건">
   <div class="wrap facts__grid">
-    <div class="fact"><span class="fact__num">24<small>시간</small></span><span class="fact__label">연중무휴 상담·출동</span></div>
-    <div class="fact"><span class="fact__num">365<small>일</small></span><span class="fact__label">쉬는 날 없이 출동</span></div>
-    <div class="fact"><span class="fact__num">제주 <small>전 지역</small></span><span class="fact__label">제주시 · 서귀포시 · 읍면</span></div>
-    <div class="fact"><span class="fact__num">NO.1<small>장비</small></span><span class="fact__label">내시경 · 고압세척 · 플렉스샤프트</span></div>
+    <div class="fact reveal"><span class="fact__num"><span data-count="24">24</span><small>시간</small></span><span class="fact__label">연중무휴 상담·출동</span></div>
+    <div class="fact reveal"><span class="fact__num"><span data-count="365">365</span><small>일</small></span><span class="fact__label">쉬는 날 없이 출동</span></div>
+    <div class="fact reveal"><span class="fact__num fact__num--ko">제주 <small>전 지역</small></span><span class="fact__label">제주시 · 서귀포시 · 읍면</span></div>
+    <div class="fact reveal"><span class="fact__num">NO.1<small>장비</small></span><span class="fact__label">내시경 · 고압세척 · 플렉스샤프트</span></div>
   </div>
 </section>
 
@@ -88,7 +89,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="label">뚫리는 순간</p>
-      <h2 class="sec-title">막혔던 곳,<br><em>이렇게 해결합니다</em></h2>
+      <h2 class="sec-title"><span class="t-dim">막혔던 곳,</span><br><em class="t-wave">이렇게 해결합니다</em></h2>
     </div>
     <div class="clips reveal">
       <figure class="clip clip--video">
@@ -117,7 +118,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="label">막힌 곳</p>
-      <h2 class="sec-title">어디가 막혔나요?</h2>
+      <h2 class="sec-title">어디가 <em class="t-marker">막혔나요</em><span class="t-q">?</span></h2>
       <p class="sec-lede">막힌 곳을 누르면 증상과 작업 방법을 바로 볼 수 있습니다.</p>
     </div>
     <div class="tabs reveal" data-tabs>
@@ -133,8 +134,8 @@
       <article class="tabpanel is-on" role="tabpanel" id="tp-sink" aria-labelledby="tb-sink">
         <figure class="tabpanel__media"><img src="img/sink-flexshaft.jpg" alt="싱크대 하부 배관에 플렉스샤프트 장비를 넣어 뚫는 모습" loading="lazy"></figure>
         <div class="tabpanel__body">
-          <h3 class="tabpanel__name">싱크대 막힘</h3>
-          <p class="tabpanel__sub">이런 증상이면 연락 주세요</p>
+          <h3 class="tabpanel__name">싱크대 <em>막힘</em></h3>
+          <p class="tabpanel__sub"><span class="tag">증상 체크</span>이런 증상이면 연락 주세요</p>
           <ul class="checks">
             <li><svg class="ic"><use href="#i-check"/></svg>설거지할 때 물이 천천히 빠지고 고여요</li>
             <li><svg class="ic"><use href="#i-check"/></svg>거름망을 비워도 그대로예요</li>
@@ -149,8 +150,8 @@
       <article class="tabpanel" role="tabpanel" id="tp-bath" aria-labelledby="tb-bath" hidden>
         <figure class="tabpanel__media"><img src="img/bath-work.jpg" alt="욕실 바닥 하수구를 점검하는 기사" loading="lazy"></figure>
         <div class="tabpanel__body">
-          <h3 class="tabpanel__name">욕실·바닥 하수구 막힘</h3>
-          <p class="tabpanel__sub">이런 증상이면 연락 주세요</p>
+          <h3 class="tabpanel__name">욕실·바닥 하수구 <em>막힘</em></h3>
+          <p class="tabpanel__sub"><span class="tag">증상 체크</span>이런 증상이면 연락 주세요</p>
           <ul class="checks">
             <li><svg class="ic"><use href="#i-check"/></svg>샤워하면 발목까지 물이 차요</li>
             <li><svg class="ic"><use href="#i-check"/></svg>머리카락을 치워도 물이 잘 안 빠져요</li>
@@ -165,8 +166,8 @@
       <article class="tabpanel" role="tabpanel" id="tp-toilet" aria-labelledby="tb-toilet" hidden>
         <figure class="tabpanel__media"><img src="img/toilet-work.jpg" alt="변기 막힘을 작업 중인 싹뚜러 기사" loading="lazy"></figure>
         <div class="tabpanel__body">
-          <h3 class="tabpanel__name">변기 막힘</h3>
-          <p class="tabpanel__sub">이런 증상이면 연락 주세요</p>
+          <h3 class="tabpanel__name">변기 <em>막힘</em></h3>
+          <p class="tabpanel__sub"><span class="tag">증상 체크</span>이런 증상이면 연락 주세요</p>
           <ul class="checks">
             <li><svg class="ic"><use href="#i-check"/></svg>물을 내리면 차오르거나 넘쳐요</li>
             <li><svg class="ic"><use href="#i-check"/></svg>뚫어뻥으로 해봐도 안 돼요</li>
@@ -181,8 +182,8 @@
       <article class="tabpanel" role="tabpanel" id="tp-pit" aria-labelledby="tb-pit" hidden>
         <figure class="tabpanel__media"><img src="img/manhole-worker3.jpg" alt="마당 맨홀에 고압세척 호스를 넣어 작업하는 모습" loading="lazy"></figure>
         <div class="tabpanel__body">
-          <h3 class="tabpanel__name">집수정·맨홀·오수배관 막힘</h3>
-          <p class="tabpanel__sub">이런 증상이면 연락 주세요</p>
+          <h3 class="tabpanel__name">집수정·맨홀·오수배관 <em>막힘</em></h3>
+          <p class="tabpanel__sub"><span class="tag">증상 체크</span>이런 증상이면 연락 주세요</p>
           <ul class="checks">
             <li><svg class="ic"><use href="#i-check"/></svg>마당·건물 하수구가 역류해요</li>
             <li><svg class="ic"><use href="#i-check"/></svg>집수정에 물이 가득 고여 있어요</li>
@@ -197,8 +198,8 @@
       <article class="tabpanel" role="tabpanel" id="tp-villa" aria-labelledby="tb-villa" hidden>
         <figure class="tabpanel__media"><img src="img/building-hose.jpg" alt="빌라 외부 하수배관에 호스를 넣어 세척하는 모습" loading="lazy"></figure>
         <div class="tabpanel__body">
-          <h3 class="tabpanel__name">빌라·다세대 공용배관 막힘</h3>
-          <p class="tabpanel__sub">이런 증상이면 연락 주세요</p>
+          <h3 class="tabpanel__name">빌라·다세대 공용배관 <em>막힘</em></h3>
+          <p class="tabpanel__sub"><span class="tag">증상 체크</span>이런 증상이면 연락 주세요</p>
           <ul class="checks">
             <li><svg class="ic"><use href="#i-check"/></svg>여러 세대에서 비슷한 증상이 나타나요</li>
             <li><svg class="ic"><use href="#i-check"/></svg>1층 세대로 물이 역류해요</li>
@@ -213,8 +214,8 @@
       <article class="tabpanel" role="tabpanel" id="tp-shop" aria-labelledby="tb-shop" hidden>
         <figure class="tabpanel__media"><img src="img/kitchen-trap.jpg" alt="식당 주방 그리스트랩과 배수구 막힘 작업" loading="lazy"></figure>
         <div class="tabpanel__body">
-          <h3 class="tabpanel__name">식당·카페·상가 배관</h3>
-          <p class="tabpanel__sub">이런 증상이면 연락 주세요</p>
+          <h3 class="tabpanel__name">식당·카페·상가 <em>배관</em></h3>
+          <p class="tabpanel__sub"><span class="tag">증상 체크</span>이런 증상이면 연락 주세요</p>
           <ul class="checks">
             <li><svg class="ic"><use href="#i-check"/></svg>주방 배수가 밀리고 바닥으로 역류해요</li>
             <li><svg class="ic"><use href="#i-check"/></svg>화장실 바닥까지 오수가 올라와요</li>
@@ -234,8 +235,8 @@
   <div class="wrap callout__grid">
     <div class="reveal">
       <p class="callout__label"><svg class="ic"><use href="#i-shield"/></svg>싹뚜러 작업 원칙</p>
-      <h2 class="callout__title">입구만 뚫고 가지 않습니다.<br>배관 안까지 확인합니다</h2>
-      <p class="callout__text">하수구는 물이 안 내려가는 곳만 뚫는다고 끝나지 않습니다. 실내 배수구에서 외부 집수정, 오수배관으로 이어지는 전체 흐름을 함께 살펴보고, 필요하면 내시경으로 원인을 확인한 뒤 고압세척으로 배관 안쪽까지 씻어냅니다.</p>
+      <h2 class="callout__title"><span class="t-strike">입구만 뚫고 가지 않습니다.</span><br><span class="t-under">배관 안까지</span> 확인합니다</h2>
+      <p class="callout__text">하수구는 물이 안 내려가는 곳만 뚫는다고 끝나지 않습니다. <strong>실내 배수구 → 외부 집수정 → 오수배관</strong>으로 이어지는 전체 흐름을 함께 살펴보고, 필요하면 <strong>내시경</strong>으로 원인을 확인한 뒤 <strong>고압세척</strong>으로 배관 안쪽까지 씻어냅니다.</p>
       <ul class="pledge">
         <li>현장 도착 후 배수 상태 먼저 확인</li>
         <li>실내 → 집수정 → 오수배관 순서로 점검</li>
@@ -252,7 +253,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="label">작업 현장</p>
-      <h2 class="sec-title">직접 다녀온<br><em>제주 현장입니다</em></h2>
+      <h2 class="sec-title"><span class="t-dim">직접 다녀온</span><br><em class="t-wave">제주 현장</em>입니다</h2>
     </div>
     <div class="gallery reveal">
       <figure class="gallery__item gallery__item--lg"><img src="img/manhole-worker.jpg" alt="" loading="lazy"><figcaption>제주 · 맨홀 오수배관 고압세척</figcaption></figure>
@@ -267,7 +268,7 @@
     </div>
 
     <div class="cases reveal">
-      <h3 class="cases__title">최근 작업 사례</h3>
+      <h3 class="cases__title"><span class="tag tag--line">BLOG</span>최근 작업 사례</h3>
       <ul class="cases__list">
         <li><a href="https://blog.naver.com/najung1236/224443851871" target="_blank" rel="noopener"><span class="cases__date">2026.10.16</span><span class="cases__name">제주 아라동 욕실·싱크대 하수구막힘 고압세척</span><svg class="ic"><use href="#i-arrow"/></svg></a></li>
         <li><a href="https://blog.naver.com/najung1236/224442800774" target="_blank" rel="noopener"><span class="cases__date">2026.10.15</span><span class="cases__name">제주 애월·한림 집수정 오수배관 하수구막힘 완벽 해결</span><svg class="ic"><use href="#i-arrow"/></svg></a></li>
@@ -288,7 +289,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="label">진행 순서</p>
-      <h2 class="sec-title">전화 한 통이면<br>4단계로 끝냅니다</h2>
+      <h2 class="sec-title">전화 <em class="t-marker">한 통</em>이면<br><span class="t-big">4</span>단계로 끝냅니다</h2>
     </div>
     <ol class="steps reveal">
       <li class="step"><span class="step__no">01</span><h3 class="step__title">전화·문자 접수</h3><p class="step__desc">막힌 곳 사진과 주소를 문자로 보내주시면 더 빨리 안내드립니다. 24시간 365일 받습니다.</p></li>
@@ -304,7 +305,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="label">실제 장비</p>
-      <h2 class="sec-title">현장 장비를<br>그대로 싣고 갑니다</h2>
+      <h2 class="sec-title">현장 장비를<br><em class="t-under">그대로</em> 싣고 갑니다</h2>
     </div>
     <div class="equip reveal">
       <article class="equip__item"><figure class="equip__media"><img src="img/camera-screen.jpg" alt="" loading="lazy"></figure><div class="equip__body"><h3 class="equip__name">배관 내시경 카메라</h3><p class="equip__desc">배관 속을 화면으로 보면서 막힌 위치와 원인을 찾습니다. 원하시면 사진으로 보여드립니다.</p></div></article>
@@ -320,7 +321,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="label">자주 묻는 질문</p>
-      <h2 class="sec-title">전화로 가장 많이 묻는 것들</h2>
+      <h2 class="sec-title">전화로 <em class="t-marker">가장 많이</em> 묻는 것들</h2>
     </div>
     <div class="faq reveal">
       <details class="faq__item" open><summary class="faq__q">밤늦게나 주말에도 오시나요?<span class="faq__icon"></span></summary><div class="faq__a">네, 365일 24시간 연중무휴로 상담하고 출동합니다. 늦은 시간이라도 편하게 전화 주세요. 통화가 어려우면 문자로 주소와 사진을 남겨주시면 확인하는 대로 연락드립니다.</div></details>
@@ -339,7 +340,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <p class="label">출동 지역 · 시간</p>
-      <h2 class="sec-title">제주시·서귀포시 전 지역,<br>24시간 365일</h2>
+      <h2 class="sec-title">제주시·서귀포시 <em class="t-wave">전 지역</em>,<br><span class="t-num">24</span>시간 <span class="t-num">365</span>일</h2>
     </div>
     <div class="info reveal">
       <div class="info__card">
@@ -366,10 +367,10 @@
 
 <!-- 마지막 CTA -->
 <section class="final" id="contact" data-hide-bbar>
-  <div class="wrap">
+  <div class="wrap reveal">
     <img class="final__mascot" src="img/logo.png" alt="" loading="lazy">
-    <p class="final__kicker">24시간 365일 연중무휴 · 제주 전 지역</p>
-    <h2 class="final__title">막힌 곳 사진 한 장,<br><em>지금 보내주세요</em></h2>
+    <p class="final__kicker"><span class="live-dot" aria-hidden="true"></span>24시간 365일 연중무휴 · 제주 전 지역</p>
+    <h2 class="final__title">막힌 곳 사진 <em class="t-marker">한 장</em>,<br><span class="t-shake">지금</span> <em>보내주세요</em></h2>
     <div class="final__actions">
       <a class="callbox callbox--xl" href="tel:010-2001-1030"><span class="callbox__label"><svg class="ic"><use href="#i-phone"/></svg>24시간 전화 상담</span><span class="callbox__num">010-2001-1030</span></a>
       <a class="btn btn--line btn--xl" href="sms:010-2001-1030"><svg class="ic"><use href="#i-sms"/></svg>문자로 사진 보내기</a>

@@ -45,6 +45,32 @@
     items.forEach(function (el) { io.observe(el); });
   }
 
+  /* 숫자 카운트업 */
+  var counters = document.querySelectorAll('[data-count]');
+  function runCount(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var dur = 900, start = null;
+    function tick(ts) {
+      if (!start) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  if (counters.length && !reduce && 'IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { runCount(en.target); cio.unobserve(en.target); }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function (el) { el.textContent = '0'; cio.observe(el); });
+  }
+
+  /* 갤러리 순차 등장 인덱스 */
+  document.querySelectorAll('.gallery__item').forEach(function (el, i) { el.style.setProperty('--i', i); });
+
   /* 하단 고정 바: 마지막 CTA 구간에서는 숨김 */
   var bbar = document.querySelector('.bbar');
   var hideAt = document.querySelector('[data-hide-bbar]');

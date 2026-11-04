@@ -1,0 +1,136 @@
+/* =====================================================================
+   문구별 타이포그래피 · 강조 효과
+   ===================================================================== */
+.pc-only{display:none}
+@media (min-width:960px){.pc-only{display:inline}}
+
+/* 숫자는 Anton */
+.num,.t-num{font-family:var(--f-num);font-weight:400;letter-spacing:.02em}
+.t-num{font-size:1.18em;color:var(--brand);line-height:1}
+.t-big{display:inline-block;font-family:var(--f-num);font-size:1.5em;line-height:.9;color:var(--brand);margin-right:.06em;transform:translateY(.04em)}
+.fact__num--ko{font-size:clamp(28px,7vw,42px)}
+
+/* 흐린 앞 문장 (뒤 강조를 살림) */
+.t-dim{color:var(--ink-2);font-size:.78em;letter-spacing:0}
+
+/* 테두리 글자 */
+.t-outline{color:transparent;-webkit-text-stroke:2px #fff;paint-order:stroke fill;font-size:.86em}
+@media (max-width:480px){.t-outline{-webkit-text-stroke-width:1.5px}}
+
+/* "싹!" 도장 찍히듯 등장 */
+.t-pop{display:inline-block;color:var(--red);transform:rotate(-8deg) translateY(-.04em);
+  text-shadow:.06em .06em 0 rgba(0,0,0,.45);font-size:1.1em;
+  animation:stamp .55s cubic-bezier(.2,1.4,.4,1) .35s both}
+@keyframes stamp{0%{opacity:0;transform:rotate(-8deg) scale(2.2)}60%{opacity:1;transform:rotate(-8deg) scale(.92)}100%{opacity:1;transform:rotate(-8deg) scale(1) translateY(-.04em)}}
+
+/* 형광펜 (제목용) — 보일 때 왼쪽에서 칠해짐 */
+.t-marker{position:relative;display:inline-block;color:var(--brand-ink);font-style:normal;z-index:0;padding:0 .08em}
+.t-marker::before{content:"";position:absolute;left:0;right:0;top:-2%;bottom:-2%;z-index:-1;background:var(--brand);border-radius:.08em;
+  transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.65,0,.35,1) .25s}
+.is-in .t-marker::before,.hero .t-marker::before{transform:scaleX(1)}
+.hero .t-marker::before{transition-delay:.75s}
+.sec-title em.t-marker,.final__title em.t-marker{color:var(--brand-ink)}
+
+/* 형광펜 (본문용) */
+mark.hl{background:linear-gradient(transparent 52%,rgba(255,201,40,.5) 52%,rgba(255,201,40,.5) 92%,transparent 92%) no-repeat 0 0/0% 100%;
+  color:#fff;font-weight:800;transition:background-size .8s ease .5s}
+.is-in mark.hl,.hero mark.hl{background-size:100% 100%}
+.hero mark.hl+mark.hl,.hero mark.hl:last-of-type{transition-delay:1s}
+
+/* 물결 밑줄 — 보일 때 왼쪽에서 그려짐 */
+.t-wave{position:relative;display:inline-block;font-style:normal;color:var(--brand);padding-bottom:.12em}
+.t-wave::after{content:"";position:absolute;left:0;right:0;bottom:0;height:.22em;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 10' preserveAspectRatio='none'%3E%3Cpath d='M0 7 Q5 2 10 7 T20 7 T30 7 T40 7' fill='none' stroke='%232DB8F0' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x;
+  background-size:auto 100%;clip-path:inset(0 100% 0 0);transition:clip-path .9s ease .3s}
+.is-in .t-wave::after{clip-path:inset(0 0 0 0)}
+
+/* 굵은 밑줄 */
+.t-under{background:linear-gradient(currentColor,currentColor) no-repeat 0 100%/0% .14em;transition:background-size .7s ease .3s;padding-bottom:.06em}
+.is-in .t-under{background-size:100% .14em}
+.sec-title em.t-under{font-style:normal;color:var(--brand)}
+.callout .t-under{background-image:linear-gradient(#15171B,#15171B)}
+
+/* 취소선 (옐로 띠 첫 줄) */
+.t-strike{position:relative;display:inline-block;color:rgba(21,23,27,.55);font-size:.78em}
+.t-strike::after{content:"";position:absolute;left:-.05em;right:-.05em;top:52%;height:.11em;background:var(--red);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .6s ease .4s}
+.is-in .t-strike::after{transform:scaleX(1)}
+.callout__text strong{color:#15171B;font-weight:900;background:rgba(21,23,27,.08);padding:0 .25em;border-radius:3px}
+
+/* 물음표 기울기, 흔들림 */
+.t-q{display:inline-block;color:var(--blue);transform-origin:50% 90%;animation:tilt 2.4s ease-in-out infinite}
+@keyframes tilt{0%,100%{transform:rotate(0)}30%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}}
+.t-shake{display:inline-block;color:var(--red)}
+.is-in .t-shake{animation:shake .7s ease .6s 2}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px) rotate(-2deg)}40%{transform:translateX(5px) rotate(2deg)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+/* 라이브 점 */
+.live-dot{display:inline-block;width:.55em;height:.55em;border-radius:50%;background:var(--red);margin-right:.5em;vertical-align:.08em;animation:ping 1.6s ease-out infinite}
+.final__kicker .live-dot{background:var(--brand);animation-name:ping-y}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(240,70,45,.6)}100%{box-shadow:0 0 0 .6em rgba(240,70,45,0)}}
+@keyframes ping-y{0%{box-shadow:0 0 0 0 rgba(255,201,40,.6)}100%{box-shadow:0 0 0 .6em rgba(255,201,40,0)}}
+
+/* 태그 */
+.tag{display:inline-block;margin-right:8px;padding:2px 8px;border-radius:3px;background:var(--brand);color:var(--brand-ink);font-family:var(--f-sans);font-size:12px;font-weight:900;letter-spacing:.04em;vertical-align:.1em}
+.tag--line{background:transparent;border:1.5px solid var(--brand);color:var(--brand);font-family:var(--f-num);font-weight:400;letter-spacing:.08em}
+
+/* 탭 제목 강조 */
+.tabpanel__name em{font-style:normal;color:var(--brand)}
+
+/* 히어로 제목·본문 순차 등장 */
+.hero__kicker{animation:rise .5s ease .05s both}
+.hero__title{animation:rise .6s ease .2s both}
+.hero__lede{animation:rise .6s ease .45s both}
+.hero .chiprow{animation:rise .6s ease .6s both}
+.hero__actions{animation:rise .6s ease .75s both}
+.hero .call-hint{animation:rise .6s ease .9s both}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero .chiprow li{transition:transform .2s,background .2s}
+.hero .chiprow li:hover{transform:translateY(-2px);background:rgba(255,201,40,.22)}
+
+/* 핵심 숫자: 빛남 + 순차 등장 */
+.fact__num{text-shadow:0 0 22px rgba(255,201,40,.35)}
+.fact.reveal:nth-child(2){transition-delay:.1s}.fact.reveal:nth-child(3){transition-delay:.2s}.fact.reveal:nth-child(4){transition-delay:.3s}
+
+/* 단계 번호: 그라데이션 + 제목 밑줄 */
+.step__no{background:linear-gradient(180deg,#FFE28A,var(--brand) 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.step__title{display:inline-block;background:linear-gradient(var(--brand),var(--brand)) no-repeat 0 100%/0% 2px;transition:background-size .6s ease .4s}
+.is-in .step__title{background-size:100% 2px}
+.steps.reveal .step{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.steps.reveal.is-in .step{opacity:1;transform:none}
+.steps.reveal .step:nth-child(2){transition-delay:.12s}.steps.reveal .step:nth-child(3){transition-delay:.24s}.steps.reveal .step:nth-child(4){transition-delay:.36s}
+
+/* 갤러리·장비·클립 카드 순차 등장 */
+.gallery.reveal .gallery__item,.equip.reveal .equip__item,.clips.reveal .clip{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.gallery.reveal.is-in .gallery__item,.equip.reveal.is-in .equip__item,.clips.reveal.is-in .clip{opacity:1;transform:none}
+.gallery.reveal .gallery__item{transition-delay:calc(.06s * var(--i,0))}
+.equip.reveal .equip__item:nth-child(2),.clips.reveal .clip:nth-child(2){transition-delay:.1s}
+.equip.reveal .equip__item:nth-child(3),.clips.reveal .clip:nth-child(3){transition-delay:.2s}
+.equip.reveal .equip__item:nth-child(4),.clips.reveal .clip:nth-child(4){transition-delay:.3s}
+
+/* 주 버튼: 빛 스침 */
+.btn--primary,.callbox,.bbar__btn--call,.topbar__cta{position:relative;overflow:hidden}
+.btn--primary::after,.callbox::after,.bbar__btn--call::after,.topbar__cta::after{content:"";position:absolute;top:-40%;bottom:-40%;left:-30%;width:28%;
+  background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0));transform:skewX(-20deg);animation:shine 4.5s ease-in-out infinite;pointer-events:none}
+.callbox::after{animation-delay:1.2s}
+@keyframes shine{0%,70%{left:-30%}100%{left:130%}}
+
+/* 전화 박스: 맥박 링 */
+.callbox{animation:pulse-ring 2.2s ease-out infinite}
+@keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(255,201,40,.55)}100%{box-shadow:0 0 0 18px rgba(255,201,40,0)}}
+
+/* 마지막 CTA 제목 */
+.final__title em{font-style:normal}
+.final__title em:not(.t-marker){color:var(--brand)}
+
+/* 동작 줄이기 설정 존중 */
+@media (prefers-reduced-motion:reduce){
+  .t-pop,.t-q,.t-shake,.live-dot,.callbox,.hero__kicker,.hero__title,.hero__lede,.hero .chiprow,.hero__actions,.hero .call-hint{animation:none!important}
+  .btn--primary::after,.callbox::after,.bbar__btn--call::after,.topbar__cta::after{display:none}
+  .t-marker::before,.t-strike::after{transform:none!important}
+  mark.hl,.t-under,.step__title{background-size:100% 100%!important}
+  .t-wave::after{clip-path:none!important}
+  .steps.reveal .step,.gallery.reveal .gallery__item,.equip.reveal .equip__item,.clips.reveal .clip{opacity:1!important;transform:none!important}
+}
+
+/* 히어로 형광펜 글자색 (style.css의 em 노랑 덮어쓰기) */
+.hero__title em.t-marker{color:var(--brand-ink)}
