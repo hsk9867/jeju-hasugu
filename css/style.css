@@ -386,7 +386,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 /* ---------- 슬라이더 공통 (영상 · 후기) ---------- */
 .slider{position:relative}
-.slider__track{cursor:grab;user-select:none;scroll-behavior:smooth}
+.slider__track{cursor:grab;user-select:none;scroll-behavior:auto}
+.slider__track.is-anim{scroll-snap-type:none}
 .slider__track.is-drag{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto}
 .slider__nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px}
 .slider__btn{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:background .15s,color .15s,border-color .15s}

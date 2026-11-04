@@ -40,7 +40,14 @@
     function perView(){var w=items[0].getBoundingClientRect().width;return Math.max(1,Math.round(track.clientWidth/(w+12)));}
     function current(){var w=items[0].getBoundingClientRect().width+12;return Math.round(track.scrollLeft/w);}
     function paint(){idx=current();$$('i',dots).forEach(function(x,i){x.classList.toggle('on',i===idx);});}
-    function go(i){var n=items.length,pv=perView(),max=Math.max(0,n-pv);if(i>max)i=0;if(i<0)i=max;var w=items[0].getBoundingClientRect().width+12;track.scrollTo({left:i*w,behavior:'smooth'});idx=i;}
+    /* 부드럽게 미끄러지듯 이동 — 스냅을 잠시 끄고 rAF로 가감속 */
+    var anim=null;
+    function slideTo(left,dur){if(anim)clearTimeout(anim);var from=track.scrollLeft,dist=left-from;if(Math.abs(dist)<1)return;
+      dur=dur||Math.min(1400,Math.max(700,Math.abs(dist)*1.1));var t0=null;track.classList.add('is-anim');
+      function step(){var ts=performance.now();if(t0===null)t0=ts;var p=Math.min(1,(ts-t0)/dur);var e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;track.scrollLeft=from+dist*e;
+        if(p<1){anim=setTimeout(step,16);}else{anim=null;track.classList.remove('is-anim');}}
+      anim=setTimeout(step,16);}
+    function go(i){var n=items.length,pv=perView(),max=Math.max(0,n-pv);if(i>max)i=0;if(i<0)i=max;var w2=items[0].getBoundingClientRect().width+12;slideTo(i*w2);idx=i;}
     function tick(){if(paused||d.hidden)return;go(current()+1);}
     function restart(){clearInterval(timer);timer=setInterval(tick,interval);}
     track.addEventListener('scroll',function(){w.requestAnimationFrame(paint);},{passive:true});
@@ -49,7 +56,8 @@
     root.addEventListener('mouseenter',function(){paused=true;});root.addEventListener('mouseleave',function(){paused=false;});
     track.addEventListener('touchstart',function(){paused=true;},{passive:true});track.addEventListener('touchend',function(){paused=false;restart();},{passive:true});
     var down=false,sx=0,sl=0,moved=false;
-    track.addEventListener('mousedown',function(e){down=true;moved=false;sx=e.pageX;sl=track.scrollLeft;track.classList.add('is-drag');e.preventDefault();});
+    track.addEventListener('touchstart',function(){if(anim){clearTimeout(anim);anim=null;track.classList.remove('is-anim');}},{passive:true});
+    track.addEventListener('mousedown',function(e){down=true;moved=false;sx=e.pageX;sl=track.scrollLeft;if(anim){clearTimeout(anim);anim=null;track.classList.remove('is-anim');}track.classList.add('is-drag');e.preventDefault();});
     w.addEventListener('mousemove',function(e){if(!down)return;var dx=e.pageX-sx;if(Math.abs(dx)>3)moved=true;track.scrollLeft=sl-dx;});
     w.addEventListener('mouseup',function(){if(!down)return;down=false;track.classList.remove('is-drag');go(current());restart();});
     track.addEventListener('click',function(e){if(moved){e.preventDefault();e.stopPropagation();moved=false;}},true);
