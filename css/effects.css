@@ -66,15 +66,13 @@
 
 /* 안내 패널 전화번호: 빛 스침 */
 .board__num,.book__call,.about__tel a,.nav-call,.bar__call{position:relative;overflow:hidden}
-.fab{overflow:hidden}
-.board__num::after,.book__call::after,.about__tel a::after,.fab::after,.nav-call::after,.bar__call::after{content:"";position:absolute;top:-40%;bottom:-40%;left:-30%;width:26%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.6),rgba(255,255,255,0));transform:skewX(-20deg);animation:shine 4.2s ease-in-out infinite;pointer-events:none}
+.board__num::after,.book__call::after,.about__tel a::after,.nav-call::after,.bar__call::after{content:"";position:absolute;top:-40%;bottom:-40%;left:-30%;width:26%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.6),rgba(255,255,255,0));transform:skewX(-20deg);animation:shine 4.2s ease-in-out infinite;pointer-events:none}
 .book__call::after{animation-delay:1.3s}
-.fab::after{animation-delay:2.1s}
 @keyframes shine{0%,70%{left:-30%}100%{left:130%}}
 .board__call .board__t2{animation:none}
 
 /* 서비스 카드: 번호 선, 제목 밑줄 그려짐 */
-.post-item .content .no{display:inline-block;padding-bottom:4px;border-bottom:2px solid var(--blue-2)}
+
 .post-item .content h3{display:inline-block;background:linear-gradient(var(--blue),var(--blue)) no-repeat 0 100%/0% 2px;transition:background-size .6s ease .3s}
 .post-item.is-in .content h3{background-size:100% 2px}
 .post-item.is-in:nth-child(2) .content h3{transition-delay:.45s}
@@ -83,8 +81,7 @@
 
 /* 진행 단계 번호: 그라데이션 + 순차 */
 .steps__no{background:linear-gradient(180deg,var(--blue-2),var(--blue) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:26px}
-.steps li h4{display:inline-block;background:linear-gradient(var(--blue-2),var(--blue-2)) no-repeat 0 100%/0% 2px;transition:background-size .6s ease .3s}
-.steps li.is-in h4{background-size:100% 2px}
+
 
 /* 장비·현장 카드 순차 등장 지연 */
 .gear__item:nth-child(2){transition-delay:.1s}.gear__item:nth-child(3){transition-delay:.2s}.gear__item:nth-child(4){transition-delay:.3s}
@@ -123,7 +120,7 @@
 /* 동작 줄이기 */
 @media (prefers-reduced-motion:reduce){
   .t-glow,.t-q,.t-shake,.gshow__tag,.gshow__img img,.intro__play,.book__call,.trust p .ic,.rev__stars .ic{animation:none!important}
-  .board__num::after,.book__call::after,.about__tel a::after,.fab::after,.nav-call::after,.bar__call::after{display:none}
+  .board__num::after,.book__call::after,.about__tel a::after,.nav-call::after,.bar__call::after{display:none}
   .t-marker::before,.t-strike::after{transform:none!important}
   .t-ul,.post-item .content h3,.steps li h4{background-size:100% .14em!important}
   .t-wave::after{clip-path:none!important}
