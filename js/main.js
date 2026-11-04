@@ -240,7 +240,7 @@
   }
 
   /* ---------- 핵심 숫자 카운트업 ---------- */
-  var counters = $('[data-count]');
+  var counters = $$('[data-count]');
   function runCount(el) {
     var target = parseInt(el.getAttribute('data-count'), 10);
     var from = parseInt(el.getAttribute('data-from') || '0', 10);
@@ -279,7 +279,7 @@
   });
 
   /* ---------- 섹션 등장 효과 ---------- */
-  var targets = $$('.board, .stat, .gshow__img, .gshow__text, .intro__text, .intro__player, .post-item, .svc-list, .proc__visual, .steps li, .gear__item, .section-title, .clip, .kt, .book__info, .book__card, .areas, .faq, .about .container');
+  var targets = $$('.board, .stat, .gshow__img, .gshow__text, .intro__text, .intro__player, .post-item, .svc-list, .proc__visual, .steps li, .gear__item, .section-title, .clip, .kt, .book__info, .book__card, .areas, .faq, .about, .about .container');
   targets.forEach(function (el) { el.classList.add('wow'); });
   if (reduce || !('IntersectionObserver' in window)) {
     targets.forEach(function (el) { el.classList.add('is-in'); });
