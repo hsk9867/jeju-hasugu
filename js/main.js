@@ -64,4 +64,42 @@
     if(!reduce){restart();}
     paint();
   });
+  /* 6) 방문 예약 폼 — 서버 주소(BOOKING_ENDPOINT)가 비어 있으면 문자 앱/복사로 전달 */
+  var BOOKING_ENDPOINT='';/* 예약 접수 서버가 생기면 주소를 넣으세요 (POST JSON) */
+  var PHONE='010-2001-1030',PHONE_RAW='01020011030';
+  var form=d.getElementById('bookForm');
+  if(form){
+    var chips=d.getElementById('typeChips'),errEl=d.getElementById('formErr'),done=d.getElementById('bookDone'),doneDesc=d.getElementById('bookDoneDesc'),selType='';
+    $$('button',chips).forEach(function(b){b.addEventListener('click',function(){selType=b.textContent.trim();$$('button',chips).forEach(function(x){var on=x===b;x.classList.toggle('is-on',on);x.setAttribute('aria-pressed',on?'true':'false');});});});
+    var dateIn=form.querySelector('[name=date]');if(dateIn){var t=new Date();dateIn.min=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');}
+    var phoneIn=form.querySelector('[name=phone]');
+    phoneIn.addEventListener('input',function(){var n=phoneIn.value.replace(/\D/g,'').slice(0,11);phoneIn.value=n.length>7?n.replace(/(\d{3})(\d{3,4})(\d{4})/,'$1-$2-$3'):n.length>3?n.replace(/(\d{3})(\d+)/,'$1-$2'):n;});
+    function showErr(m){errEl.textContent=m;errEl.hidden=false;errEl.scrollIntoView({block:'center',behavior:'smooth'});}
+    function finish(desc){form.hidden=true;done.hidden=false;if(desc)doneDesc.textContent=desc;done.scrollIntoView({block:'center',behavior:'smooth'});}
+    form.addEventListener('submit',function(e){
+      e.preventDefault();errEl.hidden=true;var f=form.elements;if(f.website.value)return;
+      var data={kind:'예약',interest:selType,place:f.place.value,date:f.date.value,time:f.time.value,region:f.region.value.trim(),name:f.name.value.trim()||'성함 미입력',phone:f.phone.value.trim(),memo:f.memo.value.trim(),agree:f.agree.checked,page:location.href};
+      if(!data.interest)return showErr('어떤 증상인지 선택해 주세요.');
+      if(!data.region)return showErr('지역을 입력해 주세요. (예: 제주시 노형동)');
+      if(!/^01[016789]-?\d{3,4}-?\d{4}$/.test(data.phone))return showErr('연락처를 정확히 입력해 주세요. (예: 010-0000-0000)');
+      if(!data.agree)return showErr('개인정보 수집 · 이용에 동의해 주세요.');
+      var btn=d.getElementById('bookSubmit');btn.disabled=true;btn.textContent='전송 중…';
+      var lines=['[방문 예약] 제주하수구제왕 싹뚜러','증상: '+data.interest,'장소: '+(data.place||'-'),'희망: '+(data.date||'가능한 빨리')+' '+data.time,'지역: '+data.region,'성함: '+data.name,'연락처: '+data.phone];
+      if(data.memo)lines.push('메모: '+data.memo);
+      var text=lines.join('\n');
+      function reset(){btn.disabled=false;btn.textContent='예약 신청하기';}
+      if(BOOKING_ENDPOINT){
+        fetch(BOOKING_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+          .then(function(r){if(!r.ok)throw new Error('전송에 실패했습니다.');return r.json().catch(function(){return{};});})
+          .then(function(){reset();finish('확인 후 바로 전화드리겠습니다. 급하시면 지금 전화 주세요.');})
+          .catch(function(err){reset();showErr((err.message||'전송에 실패했습니다.')+' 급하시면 '+PHONE+'로 전화 주세요.');});
+      }else{
+        var ua=navigator.userAgent,isMobile=/Android|iPhone|iPad|iPod/i.test(ua),sep=/iPhone|iPad|iPod/i.test(ua)?'&':'?';
+        reset();
+        if(isMobile){location.href='sms:'+PHONE_RAW+sep+'body='+encodeURIComponent(text);finish('문자 앱이 열렸습니다. 내용을 확인하고 전송 버튼을 눌러 주세요.\n확인 후 바로 전화드리겠습니다.');}
+        else{if(navigator.clipboard){navigator.clipboard.writeText(text).catch(function(){});}finish('예약 내용이 복사되었습니다. 문자로 '+PHONE+'에 보내 주시거나, 지금 전화 주세요.\n\n'+text);}
+      }
+    });
+    d.getElementById('bookAgain').addEventListener('click',function(){done.hidden=true;form.hidden=false;form.scrollIntoView({block:'start',behavior:'smooth'});});
+  }
 })();
