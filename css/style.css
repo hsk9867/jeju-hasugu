@@ -374,6 +374,22 @@ button{background:none;border:0;cursor:pointer}
 .bar__call{background:var(--red);color:#fff;font-size:17px}
 @media (min-width:1024px){.bar{display:none}}
 
+/* ---------- 24시간 긴급출동 플로팅 버튼 ---------- */
+.fab{position:fixed;right:20px;bottom:24px;z-index:1400;display:flex;align-items:center;gap:12px;padding:10px 20px 10px 12px;border-radius:999px;background:var(--red);color:#fff;box-shadow:0 12px 30px rgba(232,50,42,.45);transition:transform .2s,background .2s;animation:fabIn .6s .4s both}
+.fab:hover{background:var(--red-d);transform:translateY(-2px)}
+.fab__ring{position:absolute;inset:0;border-radius:999px;border:2px solid var(--red);animation:fabRing 2s ease-out infinite;pointer-events:none}
+.fab__icon{position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.2);flex:none}
+.fab__icon .ic{width:24px;height:24px;animation:fabShake 1.6s ease-in-out infinite}
+.fab__text{display:flex;flex-direction:column;line-height:1.15;white-space:nowrap}
+.fab__text small{font-size:12px;font-weight:700;opacity:.95;letter-spacing:-.2px}
+.fab__text b{font-family:'Montserrat',sans-serif;font-size:21px;font-weight:700;letter-spacing:.5px}
+@keyframes fabIn{from{opacity:0;transform:translateY(20px) scale(.9)}to{opacity:1;transform:none}}
+@keyframes fabRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.35);opacity:0}}
+@keyframes fabShake{0%,100%{transform:rotate(0)}10%{transform:rotate(-14deg)}20%{transform:rotate(12deg)}30%{transform:rotate(-10deg)}40%{transform:rotate(8deg)}50%{transform:rotate(0)}}
+@media (max-width:1023px){.fab{right:12px;bottom:calc(64px + 12px + env(safe-area-inset-bottom));padding:8px 14px 8px 8px;gap:8px}.fab__icon{width:38px;height:38px}.fab__icon .ic{width:20px;height:20px}.fab__text small{font-size:11px}.fab__text b{font-size:17px}}
+@media (max-width:420px){.fab__text small{display:none}}
+@media (prefers-reduced-motion:reduce){.fab,.fab__ring,.fab__icon .ic{animation:none}}
+
 /* ---------- 스크롤 등장 ---------- */
 .wow{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .wow.is-in{opacity:1;transform:none}
