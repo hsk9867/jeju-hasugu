@@ -349,13 +349,14 @@ button,input,select,textarea{font:inherit;color:inherit}
   .hero--2 .btn{width:auto}
   .hero--2 .zero b{font-size:1.8em}
 }
-.clips{display:grid;grid-auto-flow:column;grid-auto-columns:70%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.clips{display:grid;grid-auto-flow:column;grid-auto-columns:70%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.clips::-webkit-scrollbar{display:none}
 .clip{scroll-snap-align:start;margin:0;background:#070708;border:1px solid var(--line);border-radius:var(--r-media);overflow:hidden}
 .clip video{width:100%;aspect-ratio:4/5;object-fit:cover;background:#070708}
 .clip figcaption{padding:12px 14px 14px;font-size:15px;font-weight:700;line-height:1.45;color:var(--ink-2)}
 .clip figcaption b{display:inline-block;margin-right:6px;padding:2px 7px;border-radius:3px;background:var(--brand);color:#0E0F11;font-size:13px;font-weight:800}
 .clips-note{margin-top:12px;font-size:14px;color:var(--muted)}
-@media (min-width:860px){.clips{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible}.m-only{display:none}}
+@media (min-width:860px){.clips{grid-auto-columns:calc((100% - 36px)/4)}.m-only{display:none}}
 .callout--2 .callout__grid{display:grid;gap:24px;align-items:center}
 .callout--2 .callout__label .ic{stroke-width:2.4}
 .callout--2 .callout__text{font-weight:700;color:#0E0F11}
@@ -382,3 +383,28 @@ button,input,select,textarea{font:inherit;color:inherit}
 .equip__hero img{width:100%;max-height:420px;object-fit:cover;object-position:50% 40%}
 .equip__hero figcaption{padding:14px 18px;font-size:15px;color:var(--ink-2);line-height:1.5}
 .equip__hero figcaption b{display:inline-block;margin-right:8px;padding:2px 8px;border-radius:3px;background:var(--brand);color:#0E0F11;font-size:13px;font-weight:800}
+
+/* ---------- 슬라이더 공통 (영상 · 후기) ---------- */
+.slider{position:relative}
+.slider__track{cursor:grab;user-select:none;scroll-behavior:smooth}
+.slider__track.is-drag{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto}
+.slider__nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px}
+.slider__btn{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.slider__btn:hover{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.slider__btn[data-prev] .ic{transform:rotate(180deg)}
+.slider__dots{display:flex;gap:6px}
+.slider__dots i{display:block;width:8px;height:8px;border-radius:50%;background:#3A3B40;transition:background .2s,width .2s}
+.slider__dots i.on{background:var(--brand);width:22px;border-radius:4px}
+
+/* ---------- 고객 후기 ---------- */
+.reviews{display:grid;grid-auto-flow:column;grid-auto-columns:86%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.reviews::-webkit-scrollbar{display:none}
+@media (min-width:640px){.reviews{grid-auto-columns:calc((100% - 12px)/2)}}
+@media (min-width:960px){.reviews{grid-auto-columns:calc((100% - 36px)/4)}}
+.review{scroll-snap-align:start;margin:0;display:flex;flex-direction:column;min-height:100%;padding:22px 20px 20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card)}
+.review__stars{font-size:15px;letter-spacing:2px;color:var(--brand)}
+.review__text{flex:1;margin-top:12px;font-size:15.5px;line-height:1.65;color:var(--ink)}
+.review__meta{display:flex;align-items:center;gap:10px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.review__ava{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--brand);color:var(--brand-ink);font-weight:800;font-size:15px}
+.review__meta b{display:block;font-size:15px;font-weight:800}
+.review__meta small{display:block;margin-top:2px;font-size:13px;color:var(--muted)}
