@@ -239,6 +239,37 @@
     $('#bookAgain').addEventListener('click', function () { done.hidden = true; form.hidden = false; form.scrollIntoView({ block: 'start', behavior: 'smooth' }); });
   }
 
+  /* ---------- 핵심 숫자 카운트업 ---------- */
+  var counters = $('[data-count]');
+  function runCount(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var from = parseInt(el.getAttribute('data-from') || '0', 10);
+    var dur = 1100, start = null;
+    var wrap = el.parentNode;
+    function tick(ts) {
+      if (!start) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(from + (target - from) * eased);
+      if (p < 1) requestAnimationFrame(tick);
+      else if (wrap.classList.contains('stat__num--zero')) {
+        wrap.classList.add('is-pop');
+        setTimeout(function () { wrap.classList.remove('is-pop'); wrap.classList.add('is-done'); }, 1100);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  if (counters.length) {
+    if (reduce || !('IntersectionObserver' in window)) {
+      counters.forEach(function (el) { el.textContent = el.getAttribute('data-count'); if (el.parentNode.classList.contains('stat__num--zero')) el.parentNode.classList.add('is-done'); });
+    } else {
+      var cio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { runCount(en.target); cio.unobserve(en.target); } });
+      }, { threshold: 0.6 });
+      counters.forEach(function (el) { el.textContent = el.getAttribute('data-from') || '0'; cio.observe(el); });
+    }
+  }
+
   /* ---------- FAQ ---------- */
   $$('.faq__item button').forEach(function (b) {
     b.addEventListener('click', function () {
