@@ -237,6 +237,8 @@ table.t .bar{display:block;height:6px;border-radius:0 3px 3px 0;background:var(-
 .savebar.show{transform:none}
 .savebar .msg{font-size:13px;color:var(--text-2)}
 .savebar .acts{display:flex;gap:8px}
+.savebar.idle .msg{color:var(--text-3,var(--text-2))}
+.btn:disabled{opacity:.45;cursor:default}
 @media (min-width:861px){.savebar{left:232px}}
 @media (max-width:860px){.savebar{padding:10px 16px}}
 
@@ -301,7 +303,7 @@ table.t .bar{display:block;height:6px;border-radius:0 3px 3px 0;background:var(-
     <section class="view" id="v-content">
       <div class="vhead">
         <div><h1>홈페이지 편집</h1><p>문구·사진·목록을 고치고 아래 <b>저장하기</b>를 누르면 홈페이지에 바로 반영됩니다.</p></div>
-        <div class="acts"><a class="btn sm" href="/" target="_blank" rel="noopener">홈페이지 열기 ↗</a></div>
+        <div class="acts"><a class="btn sm" href="/" target="_blank" rel="noopener">홈페이지 열기 ↗</a><button class="btn sm accent" id="saveBtnTop" type="button" disabled>저장하기</button></div>
       </div>
       <div id="contentBody"><div class="loading">홈페이지 내용을 읽어오는 중…</div></div>
     </section>
@@ -331,7 +333,7 @@ table.t .bar{display:block;height:6px;border-radius:0 3px 3px 0;background:var(-
   </main>
 </div>
 
-<div class="savebar" id="savebar"><div class="msg" id="saveMsg">변경 0건</div><div class="acts"><button class="btn sm ghost" id="discardBtn">되돌리기</button><button class="btn sm accent" id="saveBtn">저장하기</button></div></div>
+<div class="savebar" id="savebar"><div class="msg" id="saveMsg">바뀐 내용이 없습니다. 위에서 문구·사진을 고치면 여기서 저장합니다.</div><div class="acts"><button class="btn sm ghost" id="discardBtn">되돌리기</button><button class="btn sm accent" id="saveBtn">저장하기</button></div></div>
 <div class="toast" id="toast"></div>
 <input type="file" id="filePick" accept="image/jpeg,image/png,image/webp" hidden>
 
@@ -811,8 +813,11 @@ async function shrink(file, opt) {
 function dirtyCount() { return Object.keys(pending).length; }
 function updateDirty() {
   const n = dirtyCount();
-  $('#saveMsg').textContent = `저장하지 않은 변경 ${n}건`;
-  $('#savebar').classList.toggle('show', n > 0 && $('#v-content').classList.contains('on'));
+  $('#saveMsg').textContent = n ? `저장하지 않은 변경 ${n}건 — 저장하기를 눌러야 홈페이지에 반영됩니다.` : '바뀐 내용이 없습니다. 위에서 문구·사진을 고치면 여기서 저장합니다.';
+  $('#savebar').classList.toggle('show', $('#v-content').classList.contains('on'));
+  $('#savebar').classList.toggle('idle', !n);
+  $('#saveBtn').disabled = !n; $('#saveBtnTop').disabled = !n;
+  $('#discardBtn').style.display = n ? '' : 'none';
   const counts = {};
   for (const k of Object.keys(pending)) { const g = groupOf(k); counts[g] = (counts[g] || 0) + 1; }
   $$('#glist button').forEach((b) => { const c = counts[b.dataset.g] || 0; const s = $('.n', b); s.textContent = c; s.classList.toggle('hidden', !c); });
@@ -822,7 +827,8 @@ $('#discardBtn').addEventListener('click', () => {
   for (const k of Object.keys(LISTS)) lists[k] = JSON.parse(settings[k] || listDefs[k]);
   renderGroup();
 });
-$('#saveBtn').addEventListener('click', async () => {
+async function saveAll() {
+  if (!dirtyCount()) return;
   const set = {}, del = [];
   for (const [k, v] of Object.entries(pending)) {
     const def = LISTS[k] ? listDefs[k] : fields.find((x) => x.key === k).def;
@@ -832,7 +838,7 @@ $('#saveBtn').addEventListener('click', async () => {
     }
     if (v === def) del.push(k); else set[k] = v;
   }
-  $('#saveBtn').disabled = true;
+  $('#saveBtn').disabled = true; $('#saveBtnTop').disabled = true;
   try {
     await api('content', { method: 'PUT', body: JSON.stringify({ set, del }) });
     for (const k of del) delete settings[k];
@@ -841,8 +847,10 @@ $('#saveBtn').addEventListener('click', async () => {
     renderGroup();
     toast('저장했습니다. 홈페이지에 바로 반영됩니다.');
   } catch (e) { toast('저장 실패: ' + e.message, true); }
-  $('#saveBtn').disabled = false;
-});
+  updateDirty();
+}
+$('#saveBtn').addEventListener('click', saveAll);
+$('#saveBtnTop').addEventListener('click', saveAll);
 window.addEventListener('beforeunload', (e) => { if (dirtyCount()) { e.preventDefault(); e.returnValue = ''; } });
 
 /* ===================== 설정 ===================== */
