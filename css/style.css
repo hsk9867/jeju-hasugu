@@ -124,6 +124,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .tabpanel[hidden]{display:none}
 .tabpanel__media{margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--bg-alt)}
 .tabpanel__media img{width:100%;height:100%;object-fit:cover}
+.tabpanel__media--duo{aspect-ratio:3/2}
+.tabpanel__media .duo{display:grid;grid-template-columns:1fr 1fr;gap:3px;height:100%}
 .tabpanel__body{padding:20px 18px 20px}
 .tabpanel__name{font-family:var(--f-head);font-weight:var(--head-weight);font-size:clamp(23px,5.6vw,30px);line-height:1.25;letter-spacing:var(--head-tracking)}
 .tabpanel__sub{margin-top:14px;font-size:14px;font-weight:800;color:var(--muted)}
@@ -139,6 +141,8 @@ button,input,select,textarea{font:inherit;color:inherit}
   .tabpanel{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
   .tabpanel__media{aspect-ratio:auto;min-height:100%;position:relative}
   .tabpanel__media img{position:absolute;inset:0}
+  .tabpanel__media .duo{position:absolute;inset:0}
+  .tabpanel__media .duo img{position:static}
   .tabpanel__body{padding:30px 32px}
 }
 
