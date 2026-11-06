@@ -35,8 +35,9 @@
     var track=root.querySelector('.slider__track'),items=$$('.slider__track > *',root),dots=root.querySelector('.slider__dots');
     var prev=root.querySelector('[data-prev]'),next=root.querySelector('[data-next]');
     var interval=parseInt(root.getAttribute('data-interval'),10)||4500,timer=null,idx=0,paused=false;
+    var rows=parseInt(root.getAttribute('data-rows'),10)||1,count=Math.ceil(items.length/rows);
     if(!track||!items.length)return;
-    items.forEach(function(_,i){var dot=d.createElement('i');dot.addEventListener('click',function(){go(i);restart();});dots.appendChild(dot);});
+    for(var k=0;k<count;k++)(function(i){var dot=d.createElement('i');dot.addEventListener('click',function(){go(i);restart();});dots.appendChild(dot);})(k);
     function perView(){var w=items[0].getBoundingClientRect().width;return Math.max(1,Math.round(track.clientWidth/(w+12)));}
     function current(){var w=items[0].getBoundingClientRect().width+12;return Math.round(track.scrollLeft/w);}
     function paint(){idx=current();$$('i',dots).forEach(function(x,i){x.classList.toggle('on',i===idx);});}
@@ -47,7 +48,7 @@
       function step(){var ts=performance.now();if(t0===null)t0=ts;var p=Math.min(1,(ts-t0)/dur);var e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;track.scrollLeft=from+dist*e;
         if(p<1){anim=setTimeout(step,16);}else{anim=null;track.classList.remove('is-anim');}}
       anim=setTimeout(step,16);}
-    function go(i){var n=items.length,pv=perView(),max=Math.max(0,n-pv);if(i>max)i=0;if(i<0)i=max;var w2=items[0].getBoundingClientRect().width+12;slideTo(i*w2);idx=i;}
+    function go(i){var n=count,pv=perView(),max=Math.max(0,n-pv);if(i>max)i=0;if(i<0)i=max;var w2=items[0].getBoundingClientRect().width+12;slideTo(i*w2);idx=i;}
     function tick(){if(paused||d.hidden)return;go(current()+1);}
     function restart(){clearInterval(timer);timer=setInterval(tick,interval);}
     track.addEventListener('scroll',function(){w.requestAnimationFrame(paint);},{passive:true});
@@ -84,7 +85,7 @@
       if(!/^01[016789]-?\d{3,4}-?\d{4}$/.test(data.phone))return showErr('연락처를 정확히 입력해 주세요. (예: 010-0000-0000)');
       if(!data.agree)return showErr('개인정보 수집 · 이용에 동의해 주세요.');
       var btn=d.getElementById('bookSubmit');btn.disabled=true;btn.textContent='전송 중…';
-      var lines=['[방문 예약] 제주하수구제왕 싹뚜러','증상: '+data.interest,'장소: '+(data.place||'-'),'희망: '+(data.date||'가능한 빨리')+' '+data.time,'지역: '+data.region,'성함: '+data.name,'연락처: '+data.phone];
+      var lines=['[방문 예약] 제주 하수구 제왕','증상: '+data.interest,'장소: '+(data.place||'-'),'희망: '+(data.date||'가능한 빨리')+' '+data.time,'지역: '+data.region,'성함: '+data.name,'연락처: '+data.phone];
       if(data.memo)lines.push('메모: '+data.memo);
       var text=lines.join('\n');
       function reset(){btn.disabled=false;btn.textContent='예약 신청하기';}

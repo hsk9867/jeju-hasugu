@@ -137,7 +137,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .tabpanel .btn{margin-top:16px}
 @media (min-width:860px){
   .tabpanel{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
-  .tabpanel__media{aspect-ratio:auto;min-height:100%}
+  .tabpanel__media{aspect-ratio:auto;min-height:100%;position:relative}
+  .tabpanel__media img{position:absolute;inset:0}
   .tabpanel__body{padding:30px 32px}
 }
 
@@ -349,14 +350,16 @@ button,input,select,textarea{font:inherit;color:inherit}
   .hero--2 .btn{width:auto}
   .hero--2 .zero b{font-size:1.8em}
 }
-.clips{display:grid;grid-auto-flow:column;grid-auto-columns:70%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.clips{display:grid;grid-auto-flow:column;grid-template-rows:auto auto;grid-auto-columns:78%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .clips::-webkit-scrollbar{display:none}
 .clip{scroll-snap-align:start;margin:0;background:#070708;border:1px solid var(--line);border-radius:var(--r-media);overflow:hidden}
-.clip video{width:100%;aspect-ratio:4/5;object-fit:cover;background:#070708}
-.clip figcaption{padding:12px 14px 14px;font-size:15px;font-weight:700;line-height:1.45;color:var(--ink-2)}
+.clip video{display:block;width:100%;aspect-ratio:960/444;object-fit:cover;background:#070708}
+.clip figcaption{padding:10px 12px 12px;font-size:14px;font-weight:700;line-height:1.45;color:var(--ink-2)}
 .clip figcaption b{display:inline-block;margin-right:6px;padding:2px 7px;border-radius:3px;background:var(--brand);color:#0E0F11;font-size:13px;font-weight:800}
+.clips .clip:last-child:nth-child(odd){grid-row:1/3;display:flex;flex-direction:column}
+.clips .clip:last-child:nth-child(odd) video{flex:1;aspect-ratio:auto;min-height:0}
 .clips-note{margin-top:12px;font-size:14px;color:var(--muted)}
-@media (min-width:860px){.clips{grid-auto-columns:calc((100% - 36px)/4)}.m-only{display:none}}
+@media (min-width:860px){.clips{grid-auto-columns:calc((100% - 24px)/3)}.m-only{display:none}}
 .callout--2 .callout__grid{display:grid;gap:24px;align-items:center}
 .callout--2 .callout__label .ic{stroke-width:2.4}
 .callout--2 .callout__text{font-weight:700;color:#0E0F11}
