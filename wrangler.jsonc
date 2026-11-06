@@ -2,6 +2,7 @@
   "name": "jeju-hasugu",
   "main": "worker.js",
   "compatibility_date": "2025-01-01",
+  "workers_dev": true,
   "assets": {
     "directory": "./",
     "binding": "ASSETS",
@@ -21,9 +22,8 @@
       { "name": "TRACK_LIMIT", "type": "ratelimit", "namespace_id": "3002", "simple": { "limit": 60, "period": 60 } }
     ]
   }
-  // 도메인을 연결하면 아래 주석을 풀고 npx wrangler deploy
-  // ,"routes": [
-  //   { "pattern": "example.com", "custom_domain": true },
-  //   { "pattern": "www.example.com", "custom_domain": true }
-  // ]
+  ,"routes": [
+    { "pattern": "xn--2e0b050bb7c63bca55k280c.com", "custom_domain": true },
+    { "pattern": "www.xn--2e0b050bb7c63bca55k280c.com", "custom_domain": true }
+  ]
 }
